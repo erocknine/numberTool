@@ -60,10 +60,13 @@
     align-items: center;
     position: relative;
   }
+  .main_pad__reader__output.input {
+    font-size: 1.5rem;
+  }
   .main_pad__reader__output.input:after {
     position: absolute;
     content: '';
-    bottom: 1px;
+    bottom: 6px;
     height: 1.25rem;
     width: 1rem;
     opacity: 1;
@@ -106,13 +109,18 @@
   cursor: pointer;
   outline: none;
   border: none;
-}
-.button.unpressed {
   box-shadow: 
     -6px -6px 14px rgba(255, 255, 255, .7),
     -6px -6px 10px rgba(255, 255, 255, .5),
     6px 6px 8px rgba(255, 255, 255, .075),
     6px 6px 10px rgba(0, 0, 0, .15);
+}
+.button.operator {
+  background: linear-gradient(90deg, rgba(221,214,243,1) 0%, rgba(250,172,168,1) 100%);
+}
+.button.special {
+  background: linear-gradient(90deg, rgb(194, 83, 71) 0%, rgb(146, 91, 170)100%);
+  color: white;
 }
 .button.pressed {
   box-shadow: 
@@ -120,6 +128,13 @@
     inset -6px -6px 10px rgba(255, 255, 255, .5),
     inset 6px 6px 8px rgba(255, 255, 255, .075),
     inset 6px 6px 10px rgba(0, 0, 0, .15);
+}
+.button.special.pressed {
+  box-shadow: 
+    inset -6px -6px 14px rgba(211, 135, 255, 0.6),
+    inset -6px -6px 10px rgba(222, 166, 255, 0.35),
+    inset 6px 6px 8px rgba(255, 255, 255, .075),
+    inset 6px 6px 10px rgba(0, 0, 0, .55);
 }
 
 .slider {
@@ -152,11 +167,9 @@
 
 .exchange_pad {
   max-height: 46rem;
-  width: 13rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
   padding: 1.5rem;
   background: rgb(224, 234, 252);
   background: linear-gradient(90deg, rgb(211, 227, 245) 0%, rgb(232, 240, 251) 100%);
@@ -165,6 +178,12 @@
   right: 1rem;
   z-index: 1;
   transition: 500ms;
+}
+.exchange_pad__column {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 13rem;
 }
 .exchange_pad.open {
   transform: translate(0, 0);
@@ -194,13 +213,17 @@
   }
 
   .exchange_pad {
-    flex-direction: row;
     width: 100vw;
     border-radius: 0 0 1rem 1rem;
     right: 0;
     padding: 1.5rem 0;
   }
-
+  .exchange_pad__column {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100vw;
+  }
   .exchange_pad.open {
     transform: translate(0, 0);
     box-shadow: 

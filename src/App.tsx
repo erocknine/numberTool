@@ -7,8 +7,9 @@ function App() {
 
   const [input, setInput] = useState<string[]>([])
   const [expected, setExpected] = useState<string>('')
-  const [output, setOutput] = useState<string>('0')
+  const [output, setOutput] = useState<string>('')
   const [exValues, setExValues] = useState<any>({})
+  const [exRules, setExRules] = useState(false)
   const [openExchange, setOpenExchange] = useState(false);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ function App() {
       }
       else {
         // eslint-disable-next-line
-        product = eval(estimate.replace(/x/ig, '*').replace(/%/ig, '*.01'))
+        product = eval(estimate.replace(/x/ig, '*').replace(/%/ig, '*.01')).toString()
       }
       setExpected(product)
     }
@@ -63,13 +64,24 @@ function App() {
 
   const handleInput = (symbol: string) => {
     let inputArray = [...input]
+
     if (symbol === '=') {
-      setOutput(expected)
+      if (exRules) {
+        let fixed = (Math.round(parseFloat(expected) * 100) / 100).toString();
+        setExpected(fixed);
+        setOutput(fixed);
+        setInput([fixed])
+        setExRules(false);
+      }
+      else {
+        setOutput(expected);
+        setInput([expected])
+      }
     }
     else {
       if (symbol === 'AC') {
         inputArray = []
-        setOutput('0')
+        setOutput('')
       }
       else if (symbol === 'DEL') {
         inputArray.pop()
@@ -84,6 +96,7 @@ function App() {
   const handleExchange = (symbol: any) => {
     const currency = exValues[symbol].toString();
     let inputArray = [...input, currency]
+    setExRules(true)
     setInput(inputArray)
   }
 
@@ -104,20 +117,23 @@ function App() {
         </article>
         <article className={openExchange ? "exchange_pad open":
         "exchange_pad closed"}>
-            <Button action={handleExchange} symbol={'JPY'}>JPY</Button>
-            <Button action={handleExchange} symbol={'HKD'}>HKD</Button>
-            <Button action={handleExchange} symbol={'KRW'}>KRW</Button>
-            <Button action={handleExchange} symbol={'EUR'}>EUR</Button>
-            <Button action={handleExchange} symbol={'GBP'}>GBP</Button>
-            <Button action={handleExchange} symbol={'AUD'}>AUD</Button>
-            <Button action={handleExchange} symbol={'CAD'}>CAD</Button>
-            <Button action={handleExchange} symbol={'TWD'}>TWD</Button>
-            <Button action={handleExchange} symbol={'CNY'}>CNY</Button>
-            <Button action={handleExchange} symbol={'SGD'}>SGD</Button>
-            <Button action={handleExchange} symbol={'MXN'}>MXN</Button>
-            <Button action={handleExchange} symbol={'INR'}>INR</Button>
-            <Button action={handleExchange} symbol={'NZD'}>NZD</Button>
-            <Button action={handleExchange} symbol={'CHF'}>CHF</Button>
+          <h2>USD</h2>
+          <div className="exchange_pad__column">
+            <Button action={handleExchange} symbol={'JPY'} signifier={''}>JPY</Button>
+            <Button action={handleExchange} symbol={'HKD'} signifier={''}>HKD</Button>
+            <Button action={handleExchange} symbol={'KRW'} signifier={''}>KRW</Button>
+            <Button action={handleExchange} symbol={'TWD'} signifier={''}>TWD</Button>
+            <Button action={handleExchange} symbol={'CNY'} signifier={''}>CNY</Button>
+            <Button action={handleExchange} symbol={'SGD'} signifier={''}>SGD</Button>
+            <Button action={handleExchange} symbol={'EUR'} signifier={''}>EUR</Button>
+            <Button action={handleExchange} symbol={'GBP'} signifier={''}>GBP</Button>
+            <Button action={handleExchange} symbol={'AUD'} signifier={''}>AUD</Button>
+            <Button action={handleExchange} symbol={'NZD'} signifier={''}>NZD</Button>
+            <Button action={handleExchange} symbol={'CAD'} signifier={''}>CAD</Button>
+            <Button action={handleExchange} symbol={'CHF'} signifier={''}>CHF</Button>
+            <Button action={handleExchange} symbol={'MXN'} signifier={''}>MXN</Button>
+            <Button action={handleExchange} symbol={'INR'} signifier={''}>INR</Button>
+          </div>
         </article>
       </main>
     </div>
@@ -129,45 +145,45 @@ const Buttonpad = ({handleInput}: {handleInput: (symbol: string) => void}) => {
   return (
     <section className="button_pad">
       <div className="button_pad__row">
-        <Button action={handleInput} symbol={'AC'}>AC</Button>
-        <Button action={handleInput} symbol={'DEL'}>DEL</Button>
-        <Button action={handleInput} symbol={'%'}>%</Button>
-        <Button action={handleInput} symbol={'/'}>/</Button>
+        <Button action={handleInput} symbol={'7'} signifier={''}>7</Button>
+        <Button action={handleInput} symbol={'8'} signifier={''}>8</Button>
+        <Button action={handleInput} symbol={'9'} signifier={''}>9</Button>
+        <Button action={handleInput} symbol={'/'} signifier={'operator'}>/</Button>
       </div>
       <div className="button_pad__row">
-        <Button action={handleInput} symbol={'7'}>7</Button>
-        <Button action={handleInput} symbol={'8'}>8</Button>
-        <Button action={handleInput} symbol={'9'}>9</Button>
-        <Button action={handleInput} symbol={'x'}>x</Button>
+        <Button action={handleInput} symbol={'4'} signifier={''}>4</Button>
+        <Button action={handleInput} symbol={'5'} signifier={''}>5</Button>
+        <Button action={handleInput} symbol={'6'} signifier={''}>6</Button>
+        <Button action={handleInput} symbol={'x'} signifier={'operator'}>x</Button>
       </div>
       <div className="button_pad__row">
-        <Button action={handleInput} symbol={'4'}>4</Button>
-        <Button action={handleInput} symbol={'5'}>5</Button>
-        <Button action={handleInput} symbol={'6'}>6</Button>
-        <Button action={handleInput} symbol={'-'}>-</Button>
+        <Button action={handleInput} symbol={'1'} signifier={''}>1</Button>
+        <Button action={handleInput} symbol={'2'} signifier={''}>2</Button>
+        <Button action={handleInput} symbol={'3'} signifier={''}>3</Button>
+        <Button action={handleInput} symbol={'-'} signifier={'operator'}>-</Button>
       </div>
       <div className="button_pad__row">
-        <Button action={handleInput} symbol={'1'}>1</Button>
-        <Button action={handleInput} symbol={'2'}>2</Button>
-        <Button action={handleInput} symbol={'3'}>3</Button>
-        <Button action={handleInput} symbol={'+'}>+</Button>
+        <Button action={handleInput} symbol={'.'} signifier={''}>.</Button>
+        <Button action={handleInput} symbol={'0'} signifier={''}>0</Button>
+        <Button action={handleInput} symbol={'√'} signifier={''}>√</Button>
+        <Button action={handleInput} symbol={'+'} signifier={'operator'}>+</Button>
       </div>
       <div className="button_pad__row">
-        <Button action={handleInput} symbol={'.'}>.</Button>
-        <Button action={handleInput} symbol={'0'}>0</Button>
-        <Button action={handleInput} symbol={'√'}>√</Button>
-        <Button action={handleInput} symbol={'='}>=</Button>
+        <Button action={handleInput} symbol={'AC'} signifier={'special'}>AC</Button>
+        <Button action={handleInput} symbol={'DEL'} signifier={'special'}>DEL</Button>
+        <Button action={handleInput} symbol={'%'} signifier={''}>%</Button>
+        <Button action={handleInput} symbol={'='} signifier={'special'}>=</Button>
       </div>
     </section>
   )
 }
 
 const Button = (props: any) => {
-  const { action, symbol } = props
+  const { action, symbol, signifier } = props
   const [pressed, setPressed] = useState(false)
 
   return (
-    <div className={pressed ? "button pressed":"button unpressed"} 
+    <div className={pressed ? `button ${signifier} pressed`:`button ${signifier}`} 
       onClick={() => action(symbol)}
       onMouseDown={() => setPressed(true)}
       onMouseUp={() => setPressed(false)}
