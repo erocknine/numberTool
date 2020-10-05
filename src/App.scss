@@ -49,6 +49,7 @@
   border-radius: 1rem;
   color: rgb(95, 95, 95);
   margin-bottom: 1rem;
+  z-index: 2;
   overflow: hidden;
   background: linear-gradient(90deg, rgb(239, 245, 255) 0%, rgb(217, 229, 245) 100%);
   box-shadow: 
@@ -270,6 +271,13 @@
   .button {
     height: 4rem;
     width: 4rem;
+  }
+
+  .button__popup {
+    white-space: break-spaces;
+    top: -3rem;
+    left: initial;
+    right: initial;
   }
 
 }
