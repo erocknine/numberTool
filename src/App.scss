@@ -14,6 +14,9 @@
   min-width: 100vw;
   background: rgb(224,234,252);
   background: linear-gradient(90deg, rgb(239, 245, 255) 0%, rgba(250,172,168,1) 100%);
+  h1, h2 {
+    margin: .75rem;
+  }
 }
 
 .pad {
@@ -23,13 +26,13 @@
 }
 
 .main_pad {
-  max-height: 46rem;
-  width: 25rem;
-  padding: 1.5rem;
+  max-height: 38rem;
+  width: 19rem;
+  padding: 1rem;
   background: rgb(224,234,252);
   background: linear-gradient(90deg, rgb(239, 245, 255) 0%, rgb(217, 229, 245) 100%);
   border-radius: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -41,12 +44,12 @@
 }
 
 .main_pad__reader {
-  width: 21rem;
-  padding: .5rem 2rem;
+  width: 18rem;
+  padding: .5rem;
   border-radius: 1rem;
   color: rgb(95, 95, 95);
   margin-bottom: 1rem;
-  overflow-x: hidden;
+  overflow: hidden;
   background: linear-gradient(90deg, rgb(239, 245, 255) 0%, rgb(217, 229, 245) 100%);
   box-shadow: 
     inset -6px -6px 14px rgba(255, 255, 255, .7),
@@ -61,14 +64,16 @@
     position: relative;
   }
   .main_pad__reader__output.input {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
+    max-height: 3rem;
+    overflow: hidden;
   }
   .main_pad__reader__output.input:after {
     position: absolute;
     content: '';
     bottom: 6px;
     height: 1.25rem;
-    width: 1rem;
+    width: .75rem;
     opacity: 1;
     animation: blinking 800ms infinite;
     border-bottom: 2px solid rgb(95, 95, 95);
@@ -96,8 +101,8 @@
 }
 
 .button {
-  height: 4rem;
-  width: 4rem;
+  height: 3rem;
+  width: 3rem;
   border-radius: 50%;
   font-size: 1rem;
   color: rgb(95, 95, 95);
@@ -105,7 +110,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem;
+  margin: .75rem;
   cursor: pointer;
   outline: none;
   border: none;
@@ -166,11 +171,11 @@
 }
 
 .exchange_pad {
-  max-height: 46rem;
+  max-height: 38rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem .5rem;
   background: rgb(224, 234, 252);
   background: linear-gradient(90deg, rgb(211, 227, 245) 0%, rgb(232, 240, 251) 100%);
   border-radius: 0 1rem 1rem 0;
@@ -181,7 +186,7 @@
 }
 .exchange_pad__column {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   width: 13rem;
 }
@@ -208,6 +213,7 @@
   }
 
   .main_pad__reader {
+    width: 21rem;
     position: sticky;
     top: 0;
   }
@@ -242,4 +248,5 @@
     height: 4rem;
     width: 4rem;
   }
+
 }
