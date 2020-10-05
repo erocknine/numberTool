@@ -3,7 +3,7 @@ import './App.scss';
 import axios from 'axios';
 
 function App() {
-  const exchangeEndpoint = `https://api.currencylayer.com/live?access_key=${process.env.REACT_APP_ACCESS_KEY}&format=1`
+  const exchangeEndpoint = `https://v6.exchangerate-api.com/v6/${process.env.REACT_APP_ACCESS_KEY}/latest/USD`
 
   const [input, setInput] = useState<string[]>([])
   const [expected, setExpected] = useState<string>('')
@@ -39,22 +39,22 @@ function App() {
   useEffect(() => {
     (async () => {
       const exchangeRates = await axios.get(exchangeEndpoint)
-      if (exchangeRates && exchangeRates.data.quotes) {
+      if (exchangeRates && exchangeRates.data.conversion_rates) {
         const rates = {
-        JPY: Math.round(exchangeRates.data.quotes.USDJPY * 100) / 100,
-        HKD: Math.round(exchangeRates.data.quotes.USDHKD * 100) / 100,
-        KRW: Math.round(exchangeRates.data.quotes.USDKRW * 100) / 100,
-        EUR: Math.round(exchangeRates.data.quotes.USDEUR * 100) / 100,
-        AUD: Math.round(exchangeRates.data.quotes.USDAUD * 100) / 100,
-        CAD: Math.round(exchangeRates.data.quotes.USDCAD * 100) / 100,
-        MXN: Math.round(exchangeRates.data.quotes.USDMXN * 100) / 100,
-        GBP: Math.round(exchangeRates.data.quotes.USDGBP * 100) / 100,
-        TWD: Math.round(exchangeRates.data.quotes.USDTWD * 100) / 100,
-        CNY: Math.round(exchangeRates.data.quotes.USDCNY * 100) / 100,
-        SGD: Math.round(exchangeRates.data.quotes.USDSGD * 100) / 100,
-        INR: Math.round(exchangeRates.data.quotes.USDINR * 100) / 100,
-        NZD: Math.round(exchangeRates.data.quotes.USDNZD * 100) / 100,
-        CHF: Math.round(exchangeRates.data.quotes.USDCHF * 100) / 100
+        JPY: Math.round(exchangeRates.data.conversion_rates.JPY * 100) / 100,
+        HKD: Math.round(exchangeRates.data.conversion_rates.HKD * 100) / 100,
+        KRW: Math.round(exchangeRates.data.conversion_rates.KRW * 100) / 100,
+        EUR: Math.round(exchangeRates.data.conversion_rates.EUR * 100) / 100,
+        AUD: Math.round(exchangeRates.data.conversion_rates.AUD * 100) / 100,
+        CAD: Math.round(exchangeRates.data.conversion_rates.CAD * 100) / 100,
+        MXN: Math.round(exchangeRates.data.conversion_rates.MXN * 100) / 100,
+        GBP: Math.round(exchangeRates.data.conversion_rates.GBP * 100) / 100,
+        TWD: Math.round(exchangeRates.data.conversion_rates.TWD * 100) / 100,
+        CNY: Math.round(exchangeRates.data.conversion_rates.CNY * 100) / 100,
+        SGD: Math.round(exchangeRates.data.conversion_rates.SGD * 100) / 100,
+        INR: Math.round(exchangeRates.data.conversion_rates.INR * 100) / 100,
+        NZD: Math.round(exchangeRates.data.conversion_rates.NZD * 100) / 100,
+        CHF: Math.round(exchangeRates.data.conversion_rates.CHF * 100) / 100
         }
         setExValues(rates)
       }
