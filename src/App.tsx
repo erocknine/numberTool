@@ -119,20 +119,20 @@ function App() {
         "exchange_pad closed"}>
           <h2>USD</h2>
           <div className="exchange_pad__column">
-            <Button action={handleExchange} symbol={'JPY'} signifier={''}>JPY</Button>
-            <Button action={handleExchange} symbol={'HKD'} signifier={''}>HKD</Button>
-            <Button action={handleExchange} symbol={'KRW'} signifier={''}>KRW</Button>
-            <Button action={handleExchange} symbol={'TWD'} signifier={''}>TWD</Button>
-            <Button action={handleExchange} symbol={'CNY'} signifier={''}>CNY</Button>
-            <Button action={handleExchange} symbol={'SGD'} signifier={''}>SGD</Button>
-            <Button action={handleExchange} symbol={'EUR'} signifier={''}>EUR</Button>
-            <Button action={handleExchange} symbol={'GBP'} signifier={''}>GBP</Button>
-            <Button action={handleExchange} symbol={'AUD'} signifier={''}>AUD</Button>
-            <Button action={handleExchange} symbol={'NZD'} signifier={''}>NZD</Button>
-            <Button action={handleExchange} symbol={'CAD'} signifier={''}>CAD</Button>
-            <Button action={handleExchange} symbol={'CHF'} signifier={''}>CHF</Button>
-            <Button action={handleExchange} symbol={'MXN'} signifier={''}>MXN</Button>
-            <Button action={handleExchange} symbol={'INR'} signifier={''}>INR</Button>
+            <ExchangeButton action={handleExchange} symbol={'JPY'} signifier={''} popup={'Japan Yen'}>JPY</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'HKD'} signifier={''} popup={'Hong Kong Dollar'}>HKD</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'KRW'} signifier={''} popup={'Korea Won'}>KRW</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'TWD'} signifier={''} popup={'Taiwan Dollar'}>TWD</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'CNY'} signifier={''} popup={'China Yuan'}>CNY</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'SGD'} signifier={''} popup={'Singapore Dollar'}>SGD</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'EUR'} signifier={''} popup={'Euro'}>EUR</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'GBP'} signifier={''} popup={'England Pound'}>GBP</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'AUD'} signifier={''} popup={'Australia Dollar'}>AUD</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'NZD'} signifier={''} popup={'New Zealand Dollar'}>NZD</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'CAD'} signifier={''} popup={'Canada Dollar'}>CAD</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'CHF'} signifier={''} popup={'Switzerland Franc'}>CHF</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'MXN'} signifier={''} popup={'Mexico Peso'}>MXN</ExchangeButton>
+            <ExchangeButton action={handleExchange} symbol={'INR'} signifier={''} popup={'India Rupee'}>INR</ExchangeButton>
           </div>
         </article>
       </main>
@@ -189,6 +189,27 @@ const Button = (props: any) => {
       onMouseUp={() => setPressed(false)}
       onMouseLeave={() => setPressed(false)}
     >
+      {props.children}
+    </div>
+  )
+}
+
+const ExchangeButton = (props: any) => {
+  const { action, symbol, signifier, popup } = props
+  const [pressed, setPressed] = useState(false)
+
+  const words = popup.split(' ')
+  const countryWord = words.slice(0, words.length - 1).join(' ')
+  const currencyWord = words[words.length - 1]
+
+  return (
+    <div className={pressed ? `button ${signifier} pressed`:`button ${signifier}`} 
+      onClick={() => action(symbol)}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
+      onMouseLeave={() => setPressed(false)}
+    >
+      <span className="button__popup"><strong>{countryWord} </strong>{currencyWord}</span>
       {props.children}
     </div>
   )
