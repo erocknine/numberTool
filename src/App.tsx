@@ -3,7 +3,7 @@ import './App.scss';
 import axios from 'axios';
 
 function App() {
-  const exchangeEndpoint = `http://api.currencylayer.com/live?access_key=${process.env.REACT_APP_ACCESS_KEY}&format=1`
+  const exchangeEndpoint = `https://api.currencylayer.com/live?access_key=${process.env.REACT_APP_ACCESS_KEY}&format=1`
 
   const [input, setInput] = useState<string[]>([])
   const [expected, setExpected] = useState<string>('')
