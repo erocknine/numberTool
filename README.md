@@ -18,7 +18,7 @@ Users can access this URL to use Number Tool.
 Using the currency options will round numbers to 2 decimal places.  
 Square root will root entire input, so be sure to press equal to only square root what you need.  
 
-Currency's include:
+Currency's include:  
 Japanese Yen (JPY)  
 Korean Won (KRW)  
 Hong Kong Dollar (HKD)  
